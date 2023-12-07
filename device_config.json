@@ -1,0 +1,18 @@
+[
+    {
+        "id":"d1",
+        "router_id":"r1"
+    },
+    {
+        "id":"d2",
+        "router_id":"r2"
+    },
+    {
+        "id":"d3",
+        "router_id":"r3"
+    },
+    {
+        "id":"d4",
+        "router_id":"r4"
+    }
+]
