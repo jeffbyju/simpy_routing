@@ -4,22 +4,23 @@ from constants import *
 from collections import deque
 
 class NetworkConfig:
-    def __init__(self,env):
+    def __init__(self,env,logger):
         self.routers = {}
         self.devices = {}
         self.fifos = []
+        self.logger = logger
         self.env = env
 
         with open(DEVICE_CONFIG_FILENAME) as f:
             device_config_data = json.load(f)
             for d in device_config_data:
-                device = Device(env,d["id"],PROCESSING_TIME,self)
+                device = Device(env,d["id"],PROCESSING_TIME,self,logger)
                 self.devices[device.id] = device
 
         with open(ROUTER_CONFIG_FILENAME) as f:
             router_config_data = json.load(f)
             for r in router_config_data:
-                router = Router(env,r["id"],r["neighbors"],r["routing"],PROCESSING_TIME,self)
+                router = Router(env,r["id"],r["neighbors"],r["routing"],PROCESSING_TIME,self,logger)
                 self.routers[router.id] = router
 
         for d in device_config_data:
@@ -31,6 +32,7 @@ class NetworkConfig:
                 self.routers[d["router_id"]].device_fifos[d["id"]] = {'in':fifo_out,'out':fifo_in}
                 self.fifos.append(fifo_in)
                 self.fifos.append(fifo_out)
+
         if len(router_config_data) > 0:
             visited = set()
             queue = deque([self.routers[router_config_data[0]["id"]]])
