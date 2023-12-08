@@ -1,0 +1,73 @@
+[{"name": "Device: sent a token with token id 0 from device d1 to dest device d3 via starting router r1 at time 2", "cat": "PERF", "ph": "B", "pid": 0, "tid": 0, "ts": 2}
+,{"name": "Device: sent a token with token id 0 from device d1 to dest device d3 via starting router r1 at time 2", "cat": "PERF", "ph": "E", "pid": 0, "tid": 0, "ts": 2.9}
+,{"name": "Device: sent a token with token id 1 from device d2 to dest device d3 via starting router r2 at time 2", "cat": "PERF", "ph": "B", "pid": 1, "tid": 0, "ts": 2}
+,{"name": "Device: sent a token with token id 1 from device d2 to dest device d3 via starting router r2 at time 2", "cat": "PERF", "ph": "E", "pid": 1, "tid": 0, "ts": 2.9}
+,{"name": "Device: sent a token with token id 2 from device d3 to dest device d2 via starting router r3 at time 2", "cat": "PERF", "ph": "B", "pid": 2, "tid": 0, "ts": 2}
+,{"name": "Device: sent a token with token id 2 from device d3 to dest device d2 via starting router r3 at time 2", "cat": "PERF", "ph": "E", "pid": 2, "tid": 0, "ts": 2.9}
+,{"name": "Device: sent a token with token id 3 from device d4 to dest device d2 via starting router r4 at time 2", "cat": "PERF", "ph": "B", "pid": 3, "tid": 0, "ts": 2}
+,{"name": "Device: sent a token with token id 3 from device d4 to dest device d2 via starting router r4 at time 2", "cat": "PERF", "ph": "E", "pid": 3, "tid": 0, "ts": 2.9}
+,{"name": "Router: received token with id 0, source id d1 and destination id d3 at router id r1 at time 2", "cat": "PERF", "ph": "B", "pid": 0, "tid": 0, "ts": 2}
+,{"name": "Router: received token with id 0, source id d1 and destination id d3 at router id r1 at time 2", "cat": "PERF", "ph": "E", "pid": 0, "tid": 0, "ts": 2.9}
+,{"name": "Router: received token with id 1, source id d2 and destination id d3 at router id r2 at time 2", "cat": "PERF", "ph": "B", "pid": 1, "tid": 0, "ts": 2}
+,{"name": "Router: received token with id 1, source id d2 and destination id d3 at router id r2 at time 2", "cat": "PERF", "ph": "E", "pid": 1, "tid": 0, "ts": 2.9}
+,{"name": "Router: received token with id 2, source id d3 and destination id d2 at router id r3 at time 2", "cat": "PERF", "ph": "B", "pid": 2, "tid": 0, "ts": 2}
+,{"name": "Router: received token with id 2, source id d3 and destination id d2 at router id r3 at time 2", "cat": "PERF", "ph": "E", "pid": 2, "tid": 0, "ts": 2.9}
+,{"name": "Router: received token with id 3, source id d4 and destination id d2 at router id r4 at time 2", "cat": "PERF", "ph": "B", "pid": 3, "tid": 0, "ts": 2}
+,{"name": "Router: received token with id 3, source id d4 and destination id d2 at router id r4 at time 2", "cat": "PERF", "ph": "E", "pid": 3, "tid": 0, "ts": 2.9}
+,{"name": "routed the token with id 0 to router r3 at router r1 at time 2", "cat": "PERF", "ph": "B", "pid": 0, "tid": 0, "ts": 2}
+,{"name": "routed the token with id 0 to router r3 at router r1 at time 2", "cat": "PERF", "ph": "E", "pid": 0, "tid": 0, "ts": 2.9}
+,{"name": "routed the token with id 1 to router r1 at router r2 at time 2", "cat": "PERF", "ph": "B", "pid": 1, "tid": 0, "ts": 2}
+,{"name": "routed the token with id 1 to router r1 at router r2 at time 2", "cat": "PERF", "ph": "E", "pid": 1, "tid": 0, "ts": 2.9}
+,{"name": "routed the token with id 2 to router r1 at router r3 at time 2", "cat": "PERF", "ph": "B", "pid": 2, "tid": 0, "ts": 2}
+,{"name": "routed the token with id 2 to router r1 at router r3 at time 2", "cat": "PERF", "ph": "E", "pid": 2, "tid": 0, "ts": 2.9}
+,{"name": "routed the token with id 3 to router r2 at router r4 at time 2", "cat": "PERF", "ph": "B", "pid": 3, "tid": 0, "ts": 2}
+,{"name": "routed the token with id 3 to router r2 at router r4 at time 2", "cat": "PERF", "ph": "E", "pid": 3, "tid": 0, "ts": 2.9}
+,{"name": "Router: received token with id 1, source id d2 and destination id d3 at router id r1 at time 2", "cat": "PERF", "ph": "B", "pid": 1, "tid": 0, "ts": 2}
+,{"name": "Router: received token with id 1, source id d2 and destination id d3 at router id r1 at time 2", "cat": "PERF", "ph": "E", "pid": 1, "tid": 0, "ts": 2.9}
+,{"name": "Router: received token with id 3, source id d4 and destination id d2 at router id r2 at time 2", "cat": "PERF", "ph": "B", "pid": 3, "tid": 0, "ts": 2}
+,{"name": "Router: received token with id 3, source id d4 and destination id d2 at router id r2 at time 2", "cat": "PERF", "ph": "E", "pid": 3, "tid": 0, "ts": 2.9}
+,{"name": "Router: received token with id 0, source id d1 and destination id d3 at router id r3 at time 2", "cat": "PERF", "ph": "B", "pid": 0, "tid": 0, "ts": 2}
+,{"name": "Router: received token with id 0, source id d1 and destination id d3 at router id r3 at time 2", "cat": "PERF", "ph": "E", "pid": 0, "tid": 0, "ts": 2.9}
+,{"name": "routed the token with id 1 to router r3 at router r1 at time 2", "cat": "PERF", "ph": "B", "pid": 1, "tid": 0, "ts": 2}
+,{"name": "routed the token with id 1 to router r3 at router r1 at time 2", "cat": "PERF", "ph": "E", "pid": 1, "tid": 0, "ts": 2.9}
+,{"name": "routed the token with id 3 to target device with id d2 at router r2 at time 2", "cat": "PERF", "ph": "B", "pid": 3, "tid": 0, "ts": 2}
+,{"name": "routed the token with id 3 to target device with id d2 at router r2 at time 2", "cat": "PERF", "ph": "E", "pid": 3, "tid": 0, "ts": 2.9}
+,{"name": "routed the token with id 0 to target device with id d3 at router r3 at time 2", "cat": "PERF", "ph": "B", "pid": 0, "tid": 0, "ts": 2}
+,{"name": "routed the token with id 0 to target device with id d3 at router r3 at time 2", "cat": "PERF", "ph": "E", "pid": 0, "tid": 0, "ts": 2.9}
+,{"name": "Router: received token with id 2, source id d3 and destination id d2 at router id r1 at time 2", "cat": "PERF", "ph": "B", "pid": 2, "tid": 0, "ts": 2}
+,{"name": "Router: received token with id 2, source id d3 and destination id d2 at router id r1 at time 2", "cat": "PERF", "ph": "E", "pid": 2, "tid": 0, "ts": 2.9}
+,{"name": "routed the token with id 2 to router r2 at router r1 at time 2", "cat": "PERF", "ph": "B", "pid": 2, "tid": 0, "ts": 2}
+,{"name": "routed the token with id 2 to router r2 at router r1 at time 2", "cat": "PERF", "ph": "E", "pid": 2, "tid": 0, "ts": 2.9}
+,{"name": "Device: sent a token with token id 4 from device d1 to dest device d3 via starting router r1 at time 4", "cat": "PERF", "ph": "B", "pid": 4, "tid": 0, "ts": 4}
+,{"name": "Device: sent a token with token id 4 from device d1 to dest device d3 via starting router r1 at time 4", "cat": "PERF", "ph": "E", "pid": 4, "tid": 0, "ts": 4.9}
+,{"name": "Device:received a token with token id 3 at device d2 from device d4 at time 4", "cat": "PERF", "ph": "B", "pid": 3, "tid": 0, "ts": 4}
+,{"name": "Device:received a token with token id 3 at device d2 from device d4 at time 4", "cat": "PERF", "ph": "E", "pid": 3, "tid": 0, "ts": 4.9}
+,{"name": "Device:received a token with token id 0 at device d3 from device d1 at time 4", "cat": "PERF", "ph": "B", "pid": 0, "tid": 0, "ts": 4}
+,{"name": "Device:received a token with token id 0 at device d3 from device d1 at time 4", "cat": "PERF", "ph": "E", "pid": 0, "tid": 0, "ts": 4.9}
+,{"name": "Device: sent a token with token id 5 from device d4 to dest device d2 via starting router r4 at time 4", "cat": "PERF", "ph": "B", "pid": 5, "tid": 0, "ts": 4}
+,{"name": "Device: sent a token with token id 5 from device d4 to dest device d2 via starting router r4 at time 4", "cat": "PERF", "ph": "E", "pid": 5, "tid": 0, "ts": 4.9}
+,{"name": "Router: received token with id 5, source id d4 and destination id d2 at router id r4 at time 4", "cat": "PERF", "ph": "B", "pid": 5, "tid": 0, "ts": 4}
+,{"name": "Router: received token with id 5, source id d4 and destination id d2 at router id r4 at time 4", "cat": "PERF", "ph": "E", "pid": 5, "tid": 0, "ts": 4.9}
+,{"name": "Router: received token with id 2, source id d3 and destination id d2 at router id r2 at time 4", "cat": "PERF", "ph": "B", "pid": 2, "tid": 0, "ts": 4}
+,{"name": "Router: received token with id 2, source id d3 and destination id d2 at router id r2 at time 4", "cat": "PERF", "ph": "E", "pid": 2, "tid": 0, "ts": 4.9}
+,{"name": "Router: received token with id 1, source id d2 and destination id d3 at router id r3 at time 4", "cat": "PERF", "ph": "B", "pid": 1, "tid": 0, "ts": 4}
+,{"name": "Router: received token with id 1, source id d2 and destination id d3 at router id r3 at time 4", "cat": "PERF", "ph": "E", "pid": 1, "tid": 0, "ts": 4.9}
+,{"name": "Router: received token with id 4, source id d1 and destination id d3 at router id r1 at time 4", "cat": "PERF", "ph": "B", "pid": 4, "tid": 0, "ts": 4}
+,{"name": "Router: received token with id 4, source id d1 and destination id d3 at router id r1 at time 4", "cat": "PERF", "ph": "E", "pid": 4, "tid": 0, "ts": 4.9}
+,{"name": "Device: sent a token with token id 6 from device d2 to dest device d3 via starting router r2 at time 4", "cat": "PERF", "ph": "B", "pid": 6, "tid": 0, "ts": 4}
+,{"name": "Device: sent a token with token id 6 from device d2 to dest device d3 via starting router r2 at time 4", "cat": "PERF", "ph": "E", "pid": 6, "tid": 0, "ts": 4.9}
+,{"name": "Device: sent a token with token id 7 from device d3 to dest device d2 via starting router r3 at time 4", "cat": "PERF", "ph": "B", "pid": 7, "tid": 0, "ts": 4}
+,{"name": "Device: sent a token with token id 7 from device d3 to dest device d2 via starting router r3 at time 4", "cat": "PERF", "ph": "E", "pid": 7, "tid": 0, "ts": 4.9}
+,{"name": "routed the token with id 5 to router r2 at router r4 at time 4", "cat": "PERF", "ph": "B", "pid": 5, "tid": 0, "ts": 4}
+,{"name": "routed the token with id 5 to router r2 at router r4 at time 4", "cat": "PERF", "ph": "E", "pid": 5, "tid": 0, "ts": 4.9}
+,{"name": "routed the token with id 2 to target device with id d2 at router r2 at time 4", "cat": "PERF", "ph": "B", "pid": 2, "tid": 0, "ts": 4}
+,{"name": "routed the token with id 2 to target device with id d2 at router r2 at time 4", "cat": "PERF", "ph": "E", "pid": 2, "tid": 0, "ts": 4.9}
+,{"name": "routed the token with id 1 to target device with id d3 at router r3 at time 4", "cat": "PERF", "ph": "B", "pid": 1, "tid": 0, "ts": 4}
+,{"name": "routed the token with id 1 to target device with id d3 at router r3 at time 4", "cat": "PERF", "ph": "E", "pid": 1, "tid": 0, "ts": 4.9}
+,{"name": "routed the token with id 4 to router r3 at router r1 at time 4", "cat": "PERF", "ph": "B", "pid": 4, "tid": 0, "ts": 4}
+,{"name": "routed the token with id 4 to router r3 at router r1 at time 4", "cat": "PERF", "ph": "E", "pid": 4, "tid": 0, "ts": 4.9}
+,{"name": "Router: received token with id 5, source id d4 and destination id d2 at router id r2 at time 4", "cat": "PERF", "ph": "B", "pid": 5, "tid": 0, "ts": 4}
+,{"name": "Router: received token with id 5, source id d4 and destination id d2 at router id r2 at time 4", "cat": "PERF", "ph": "E", "pid": 5, "tid": 0, "ts": 4.9}
+,{"name": "Had to put back token 5 destined to Router d2 at router r2 input at time 4", "cat": "PERF", "ph": "B", "pid": 5, "tid": 0, "ts": 4}
+,{"name": "Had to put back token 5 destined to Router d2 at router r2 input at time 4", "cat": "PERF", "ph": "E", "pid": 5, "tid": 0, "ts": 4.9}
+]
