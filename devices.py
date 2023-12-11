@@ -27,10 +27,11 @@ class Router:
         while True:
         
             try:
-                yield self.env.timeout(self.processing_time)
+                #yield self.env.timeout(self.processing_time)
                 for device_id,device_fifos in self.device_fifos.items():
                     if len(device_fifos['in'].items) > 0:
                         token = yield device_fifos['in'].get()
+                        #yield self.env.timeout(self.processing_time)
                         print(f"received token with id {token.id}, source id {token.source_id} and destination id {token.dest_id} at router id {self.id} at time {self.env.now}")
                         if TRACE_ROUTER==True:
                           self.logger.log_event((self.env.now, f'Router: received token with id {token.id}, source id {token.source_id} and destination id {token.dest_id} at router id {self.id} at time {self.env.now}','B', token.id, 0) )
@@ -107,7 +108,7 @@ class Router:
                                    self.logger.log_event((self.env.now, f'Had to put back token {token.id} destined to Router {token.dest_id} at router {self.id} input at time {self.env.now}','B', token.id, 0) )
                                    self.logger.log_event((self.env.now+.9, f'Had to put back token {token.id} destined to Router {token.dest_id} at router {self.id} input at time {self.env.now}','E', token.id, 0) )
                             
-                #yield self.env.timeout(self.processing_time)
+                yield self.env.timeout(self.processing_time)
             except Exception as e:
                 print("exception")
                 print(e)
@@ -131,9 +132,10 @@ class Device:
         while True:
             try:
                 if self.fifos:
-                    yield self.env.timeout(self.processing_time)
+                    
                     if len(self.fifos['in'].items) > 0:
                         token = yield self.fifos['in'].get()
+                        yield self.env.timeout(self.processing_time)
                         print(f"received a token with token id {token.id} at device {self.id} from device {token.source_id} at time {self.env.now}")
                         self.logger.log_event((self.env.now, f'Device:received a token with token id {token.id} at device {self.id} from device {token.source_id} at time {self.env.now}','B', token.id, 0) )
                         self.logger.log_event((self.env.now+0.9, f'Device:received a token with token id {token.id} at device {self.id} from device {token.source_id} at time {self.env.now}','E', token.id, 0) )
@@ -143,14 +145,14 @@ class Device:
                         random.seed(234)
                         dest_device = random.choice(other_connected_devices)
                         token = Token(self.id,dest_device.id)
-                        #yield self.env.timeout(self.processing_time)
+                        yield self.env.timeout(self.processing_time)
                         if len(self.fifos['out'].items) < STORE_CAPACITY:
                             yield self.fifos['out'].put(token)
                             print(f"sent a token with token id {token.id} from device {self.id} to dest device {dest_device.id} via starting router {self.router_id} at time {self.env.now}")
                             self.logger.log_event((self.env.now, f'Device: sent a token with token id {token.id} from device {self.id} to dest device {dest_device.id} via starting router {self.router_id} at time {self.env.now}','B', token.id, 0) )
                             self.logger.log_event((self.env.now+0.9, f'Device: sent a token with token id {token.id} from device {self.id} to dest device {dest_device.id} via starting router {self.router_id} at time {self.env.now}','E', token.id, 0) )
 
-                #yield self.env.timeout(self.processing_time)
+                yield self.env.timeout(self.processing_time)
                 print(f"processed stuff for device with id {self.id} at time {self.env.now}")
             except Exception as e:
                 print("exception ",e)

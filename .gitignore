@@ -1,2 +1,6 @@
 ./example2.json
 ./logs
+__pycache__/constants.cpython-311.pyc
+__pycache__/devices.cpython-311.pyc
+logs
+example2.json
