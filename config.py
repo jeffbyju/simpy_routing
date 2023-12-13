@@ -2,12 +2,14 @@ import json
 from devices import *
 from constants import *
 from collections import deque
+from port import *
+from buffer import *
 
 class NetworkConfig:
     def __init__(self,env,logger):
         self.routers = {}
         self.devices = {}
-        self.fifos = []
+        self.ports = []
         self.logger = logger
         self.env = env
 
@@ -25,13 +27,38 @@ class NetworkConfig:
 
         for d in device_config_data:
             if "router_id" in d:
-                fifo_in = simpy.Store(env,capacity=STORE_CAPACITY)
-                fifo_out = simpy.Store(env,capacity=STORE_CAPACITY)
+                out_port = Port()
+                in_port = Port()
+                buffer1 = Buffer(5)
+                buffer2 = Buffer(2)
+                buffer3 = Buffer(5)
+                buffer4 = Buffer(2)
+
+                out_port.set_vc1(buffer1)
+                out_port.set_vc2(buffer2)
+                in_port.set_vc1(buffer3)
+                in_port.set_vc2(buffer4)
+
                 self.devices[d["id"]].router_id = d["router_id"]
-                self.devices[d["id"]].fifos = {'in':fifo_in,'out':fifo_out}
-                self.routers[d["router_id"]].device_fifos[d["id"]] = {'in':fifo_out,'out':fifo_in}
-                self.fifos.append(fifo_in)
-                self.fifos.append(fifo_out)
+                self.devices[d["id"]].port = out_port
+                self.routers[d["router_id"]].device_ports[d["id"]] = in_port
+
+                out_port_credit_stores = {
+                    'vc1':simpy.Container(self.env, init=5, capacity=5),
+                    'vc2':simpy.Container(self.env, init=2, capacity=2)
+                }
+
+                in_port_credit_stores = {
+                    'vc1':simpy.Container(self.env,init=5,capacity=5),
+                    'vc2':simpy.Container(self.env,init=2,capacity=2)
+                }
+
+                self.devices[d["id"]].router_credit_stores = out_port_credit_stores
+                self.routers[d["router_id"]].device_credit_stores[d["id"]] = in_port_credit_stores
+                
+                self.ports.append(out_port)
+                self.ports.append(in_port)
+
 
         if len(router_config_data) > 0:
             visited = set()
@@ -44,12 +71,37 @@ class NetworkConfig:
                 for n in curr_router.neighbors:
                     if n not in visited:
                         queue.append(self.routers[n])
-                        fifo_in = simpy.Store(env,capacity=STORE_CAPACITY)
-                        fifo_out = simpy.Store(env,capacity=STORE_CAPACITY)
-                        self.routers[curr_router.id].router_fifos[n] = {'in':fifo_in,'out':fifo_out}
-                        self.routers[n].router_fifos[curr_router.id] = {'in':fifo_out,'out':fifo_in}
-                        self.fifos.append(fifo_in)
-                        self.fifos.append(fifo_out)
+
+                        out_port = Port()
+                        in_port = Port()
+                        buffer1 = Buffer(5)
+                        buffer2 = Buffer(2)
+                        buffer3 = Buffer(5)
+                        buffer4 = Buffer(2)
+
+                        out_port.set_vc1(buffer1)
+                        out_port.set_vc2(buffer2)
+                        in_port.set_vc1(buffer3)
+                        in_port.set_vc2(buffer4)
+
+                        out_port_credit_stores = {
+                            'vc1':simpy.Container(self.env, init=5, capacity=5),
+                            'vc2':simpy.Container(self.env, init=2, capacity=2)
+                        }
+
+                        in_port_credit_stores = {
+                            'vc1':simpy.Container(self.env,init=5,capacity=5),
+                            'vc2':simpy.Container(self.env,init=2,capacity=2)
+                        }
+
+                        self.routers[n].router_ports[curr_router.id] = out_port
+                        self.routers[curr_router.id].router_ports[n] = in_port
+
+                        self.routers[n].router_credit_stores[curr_router.id] = out_port_credit_stores
+                        self.routers[curr_router.id].router_credit_stores[n] = in_port_credit_stores
+                        
+                        self.ports.append(out_port)
+                        self.ports.append(in_port)
 
     def __del__(self):
         print("deleting ",self.env.now)
