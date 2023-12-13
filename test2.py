@@ -38,6 +38,7 @@ class Receiver:
 
     def run(self):
         while True:
+            print(self.in_pipe1.items)
             if len(self.in_pipe1.items) > 0:
                 msg = yield self.in_pipe1.get()
                 print(f'Received message: {msg} at {self.env.now}')

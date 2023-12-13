@@ -31,8 +31,8 @@ class Router:
                     for channel in VIRTUAL_CHANNELS:
                         buffer = getattr(device_ports,channel)
 
-                        if buffer.get_num_items() > 0:
-                            token = buffer.peek()
+                        if len(buffer.items) > 0:
+                            token = buffer.items[0]
                             print(f"received token with id {token.id}, source id {token.source_id} and destination id {token.dest_id} at router id {self.id} at time {self.env.now} ",token)
                             if self.network_config.get_device_router_id(token.dest_id) == self.id:
                                 print("entered 1")
@@ -40,9 +40,9 @@ class Router:
                                     complementary_channel = get_complementary_channel(channel)
                                     print(f"entering complementary channel {complementary_channel} for device {device_id} at router {self.id}")
                                     if self.device_credit_stores[token.dest_id][complementary_channel].level > 0:
-                                        print("before ",buffer.container)
-                                        buffer.read()
-                                        print("after ",buffer.container)
+                                        print("before ",buffer.items)
+                                        yield buffer.get()
+                                        print("after ",buffer.items)
                                         yield self.device_credit_stores[token.dest_id][complementary_channel].get(1)
                                         yield self.device_credit_stores[device_id][channel].put(1)
                                         getattr(self.device_ports[token.dest_id],complementary_channel).write(token)
@@ -51,9 +51,9 @@ class Router:
                                         print(f"credit not available for device port {device_id} channel {channel} at router {self.id}")
                                 else:
                                     print(f"entering channel {channel} for device {device_id} at router {self.id}")
-                                    print("before ",buffer.container)
-                                    buffer.read()
-                                    print("after ",buffer.container)
+                                    print("before ",buffer.items)
+                                    yield buffer.get()
+                                    print("after ",buffer.items)
                                     yield self.device_credit_stores[token.dest_id][channel].get(1)
                                     yield self.device_credit_stores[device_id][channel].put(1)
                                     getattr(self.device_ports[token.dest_id],channel).write(token)
@@ -64,17 +64,17 @@ class Router:
                                 if self.router_credit_stores[next_router_id][channel].level == 0:
                                     complementary_channel = get_complementary_channel(channel)
                                     if self.router_credit_stores[next_router_id][complementary_channel].level > 0:
-                                        print("before ",buffer.container)
-                                        buffer.read()
-                                        print("after ",buffer.container)
+                                        print("before ",buffer.items)
+                                        yield buffer.get()
+                                        print("after ",buffer.items)
                                         yield self.router_credit_stores[next_router_id][complementary_channel].get(1)
                                         yield self.device_credit_stores[device_id][channel].put(1)
                                         getattr(self.router_ports[next_router_id],complementary_channel).write(token)
                                         print(f"routed the token with id {token.id} to router {self.network_config.get_next_router_id(self.id,self.network_config.get_device_router_id(token.dest_id))} at router {self.id} at time {self.env.now}")
                                 else:
-                                    print("before ",buffer.container)
-                                    buffer.read()
-                                    print("after ",buffer.container)
+                                    print("before ",buffer.items)
+                                    yield buffer.get()
+                                    print("after ",buffer.items)
                                     yield self.router_credit_stores[next_router_id][channel].get(1)
                                     print("yo")
                                     yield self.device_credit_stores[device_id][channel].put(1)
@@ -86,8 +86,8 @@ class Router:
                     for channel in VIRTUAL_CHANNELS:
                         buffer = getattr(router_ports,channel)
 
-                        if buffer.get_num_items() > 0:            
-                            token = buffer.peek()
+                        if len(buffer.items) > 0:            
+                            token = buffer.items[0]
                             print(f"received token with id {token.id}, source id {token.source_id} and destination id {token.dest_id} at router id {self.id} at time {self.env.now} ",token)
                             if self.network_config.get_device_router_id(token.dest_id) == self.id:
                                 print("entered 2")
@@ -96,13 +96,13 @@ class Router:
                                     print("entered 10")
                                     if self.device_credit_stores[token.dest_id][complementary_channel].level > 0:
                                         print("entered 11")
-                                        buffer.read()
+                                        yield buffer.get()
                                         yield self.device_credit_stores[token.dest_id][complementary_channel].get(1)
                                         yield self.router_credit_stores[router_id][channel].put(1)
                                         getattr(self.device_ports[token.dest_id],complementary_channel).write(token)
                                         print(f"routed the token with id {token.id} to target device with id {token.dest_id} at router {self.id} at time {self.env.now}")
                                 else:
-                                    buffer.read()
+                                    yield buffer.get()
                                     yield self.device_credit_stores[token.dest_id][channel].get(1)
                                     yield self.router_credit_stores[router_id][channel].put(1)
                                     getattr(self.device_ports[token.dest_id],channel).write(token)
@@ -115,13 +115,13 @@ class Router:
                                     print("entered 12")
                                     if self.router_credit_stores[next_router_id][complementary_channel].level > 0:
                                         print("entered 13")
-                                        buffer.read()
+                                        yield buffer.get()
                                         yield self.router_credit_stores[next_router_id][complementary_channel].get(1)
                                         yield self.router_credit_stores[router_id][channel].put(1)
                                         getattr(self.router_ports[next_router_id],complementary_channel).write(token)
                                         print(f"routed the token with id {token.id} to router {self.network_config.get_next_router_id(self.id,self.network_config.get_device_router_id(token.dest_id))} at router {self.id} at time {self.env.now}")
                                 else:
-                                    buffer.read()
+                                    yield buffer.get()
                                     yield self.router_credit_stores[next_router_id][channel].get(1)
                                     yield self.router_credit_stores[router_id][channel].put(1)
                                     getattr(self.router_ports[next_router_id],channel).write(token)
@@ -155,8 +155,9 @@ class Device:
                     for channel in VIRTUAL_CHANNELS:
                         buffer = getattr(self.port,channel)
                         
-                        if buffer.get_num_items() > 0:
-                            token = buffer.read()
+                        if len(buffer.items) > 0:
+                            token = buffer.items[0]
+                            yield buffer.get()
                             yield self.network_config.routers[self.router_id].device_credit_stores[self.id].put(1)
                             
                             print(f"received a token with token id {token.id} at device {self.id} from device {token.source_id} at time {self.env.now}")

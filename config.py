@@ -4,6 +4,7 @@ from constants import *
 from collections import deque
 from port import *
 from buffer import *
+import simpy
 
 class NetworkConfig:
     def __init__(self,env,logger):
@@ -29,10 +30,10 @@ class NetworkConfig:
             if "router_id" in d:
                 out_port = Port()
                 in_port = Port()
-                buffer1 = Buffer(5)
-                buffer2 = Buffer(2)
-                buffer3 = Buffer(5)
-                buffer4 = Buffer(2)
+                buffer1 = simpy.Store(env,capacity=5)
+                buffer2 = simpy.Store(env,capacity=2)
+                buffer3 = simpy.Store(env,capacity=5)
+                buffer4 = simpy.Store(env,capacity=2)
 
                 out_port.set_vc1(buffer1)
                 out_port.set_vc2(buffer2)
@@ -74,10 +75,10 @@ class NetworkConfig:
 
                         out_port = Port()
                         in_port = Port()
-                        buffer1 = Buffer(5)
-                        buffer2 = Buffer(2)
-                        buffer3 = Buffer(5)
-                        buffer4 = Buffer(2)
+                        buffer1 = simpy.Store(env,capacity=5)
+                        buffer2 = simpy.Store(env,capacity=2)
+                        buffer3 = simpy.Store(env,capacity=5)
+                        buffer4 = simpy.Store(env,capacity=2)
 
                         out_port.set_vc1(buffer1)
                         out_port.set_vc2(buffer2)
