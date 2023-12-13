@@ -54,8 +54,10 @@ class NetworkConfig:
                     'vc2':simpy.Container(self.env,init=2,capacity=2)
                 }
 
-                self.devices[d["id"]].router_credit_stores = out_port_credit_stores
-                self.routers[d["router_id"]].device_credit_stores[d["id"]] = in_port_credit_stores
+                self.devices[d["id"]].out_credit_stores = out_port_credit_stores
+                self.devices[d["id"]].in_credit_stores = in_port_credit_stores
+                self.routers[d["router_id"]].out_device_credit_stores[d["id"]] = in_port_credit_stores
+                self.routers[d["router_id"]].in_device_credit_stores[d["id"]] = out_port_credit_stores
                 
                 self.ports.append(out_port)
                 self.ports.append(in_port)
@@ -98,8 +100,10 @@ class NetworkConfig:
                         self.routers[n].router_ports[curr_router.id] = out_port
                         self.routers[curr_router.id].router_ports[n] = in_port
 
-                        self.routers[n].router_credit_stores[curr_router.id] = out_port_credit_stores
-                        self.routers[curr_router.id].router_credit_stores[n] = in_port_credit_stores
+                        self.routers[n].in_router_credit_stores[curr_router.id] = out_port_credit_stores
+                        self.routers[n].out_router_credit_stores[curr_router.id] = in_port_credit_stores 
+                        self.routers[curr_router.id].in_router_credit_stores[n] = in_port_credit_stores
+                        self.routers[curr_router.id].out_router_credit_stores[n] = out_port_credit_stores
                         
                         self.ports.append(out_port)
                         self.ports.append(in_port)
